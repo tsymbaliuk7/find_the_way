@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {find} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 
 // tslint:disable-next-line:typedef
@@ -114,7 +115,9 @@ export class AppComponent implements OnInit{
     return result;
   }
 
-  constructor() {}
+  constructor(private title: Title) {
+    this.title.setTitle("Find the way")
+  }
 
   learn(): void{
     for (let i = 0; i < this.maxIter; i++) {
@@ -182,7 +185,7 @@ export class AppComponent implements OnInit{
         let [moves, movesValues] = this.getPossibleMoves();
         let values = this.getPossibleValues(moves);
         let chosenMove = moves[values.indexOf(Math.max(...values))];
-        await delay(1000)
+        await delay(500)
         this.searcherPosition = chosenMove;
         if (this.searcherPosition == this.targetPosition){
           this.isReady = true;
